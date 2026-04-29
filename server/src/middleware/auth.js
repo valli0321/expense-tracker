@@ -25,7 +25,7 @@ export const authMiddleware = asyncHandler(async (req, res, next) => {
     }
 
     if (!user.refreshToken) {
-      throw new ApiError(401, "Session expired. Please login again");
+      throw new ApiError(401, "User already logged out. Please login again");
     }
 
     req.user = user;
