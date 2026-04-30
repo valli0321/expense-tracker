@@ -58,6 +58,15 @@ export const registerUser = asyncHandler(async(req, res) => {
         throw new ApiError(500, "Something went wrong while registering user");
     }
 
+    // After user is created
+    await Category.insertMany([
+        { userId: createdUser._id, name: "Salary", type: "income" },
+        { userId: createdUser._id, name: "Freelance", type: "income" },
+        { userId: createdUser._id, name: "Business", type: "income" },
+        { userId: createdUser._id, name: "Transport", type: "expense" },
+        { userId: createdUser._id, name: "Shopping", type: "expense" },
+    ]);
+
     res.status(201).json(new ApiResponse(201, createdUser, "User registered Successfully"));
 });
 

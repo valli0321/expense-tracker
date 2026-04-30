@@ -1,4 +1,5 @@
 import express from "express";
+
 import { getUserInfo, loginUser, logoutUser, registerUser, uploadProfileImage } from "../controllers/authController.js";
 import { authMiddleware } from "../middleware/auth.js";
 import upload from "../middleware/uploadMiddleware.js";
