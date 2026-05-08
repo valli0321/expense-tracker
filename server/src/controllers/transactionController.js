@@ -135,7 +135,6 @@ export const updateTransaction = asyncHandler(async(req, res) => {
     if(!transaction) throw new ApiError(404, "Transaction not found");
 
     if(categoryId){
-        console.log(categoryId);
         const category = await Category.findById(categoryId);
 
         if(!category) throw new ApiError(404, "Invalid Category");
