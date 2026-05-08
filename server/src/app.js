@@ -10,8 +10,9 @@ import connectDB from "./config/db.js";
 import errorHandler from "./utils/errorHandler.js";
 
 import authRoutes from "./routes/authRoutes.js";
-import incomeRoutes from "./routes/incomeRoutes.js";
+import transactionRoutes from "./routes/transactionRoutes.js";
 import categoryRoutes from "./routes/categoryRoutes.js";
+import dashboardRoutes from "./routes/dashboardRoutes.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -34,7 +35,8 @@ app.use(cookieParser());
 // API routes
 app.use("/api/v1/auth", authRoutes);
 app.use("/api/v1/category", categoryRoutes);
-app.use("/api/v1/income", incomeRoutes);
+app.use("/api/v1/transaction", transactionRoutes);
+app.use("/api/v1/dashboard", dashboardRoutes);
 
 //Serve uploads folder
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));

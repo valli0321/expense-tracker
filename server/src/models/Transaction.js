@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const incomeSchema = new mongoose.Schema(
+const transactionSchema = new mongoose.Schema(
     {
         userId : {
             type: mongoose.Schema.Types.ObjectId,
@@ -24,6 +24,12 @@ const incomeSchema = new mongoose.Schema(
         category: {
             type: mongoose.Schema.Types.ObjectId,
             ref: "Category",
+            default: null,
+        },
+
+        type: {
+            type: String,
+            enum: ["income", "expense"],
             required: true,
         },
 
@@ -43,6 +49,6 @@ const incomeSchema = new mongoose.Schema(
     }
 );
 
-const Income = mongoose.model("Income", incomeSchema);
+const Transaction = mongoose.model("Transaction", transactionSchema);
 
-export default Income;
+export default Transaction;
