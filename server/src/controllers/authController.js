@@ -86,7 +86,7 @@ export const loginUser = asyncHandler(async (req, res) => {
     const isPasswordValid = await user.comparePassword(password);
 
     if(!isPasswordValid){
-        throw new ApiError(404, "Invalid user credentials");
+        throw new ApiError(401, "Invalid user credentials");
     }
 
     const { accessToken, refreshToken } = await generateAccessandRefreshTokens(user);

@@ -12,7 +12,7 @@ router.get("/get-user", authMiddleware, getUserInfo);
 router.post("/register",upload.single("profileImage"), registerUser);
 router.post("/login", loginUser);
 router.post("/logout", authMiddleware, logoutUser);
-router.post("/upload-image",authMiddleware, upload.single("profileImage"), uploadProfileImage)
+router.post("/upload-image",authMiddleware, upload.single("profileImage"), uploadProfileImage);
 
 
 export default router;
