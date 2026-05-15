@@ -1,14 +1,20 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-hot-toast"
 
 import Input from '../../components/Inputs/Input';
 import AuthLayout from '../../components/layouts/AuthLayout';
 import { validateEmail } from '../../utils/helper';
+import { apiPost } from '../../utils/apiUtils';
+import { API_PATHS } from '../../utils/apiPath';
+import { UserContext } from '../../context/UserContext';
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
+
+  const  { updateUser } = useContext(UserContext);
 
   const navigate = useNavigate();
 
@@ -27,7 +33,24 @@ const Login = () => {
 
     setError("");
 
-
+    try {
+      const body = {
+        email,
+        password
+      }
+      const response = await apiPost(API_PATHS.AUTH.LOGIN, body);
+      if(response?.accessToken){
+        localStorage.setItem("isLoggedIn", true);
+        
+        updateUser(response?.user);
+        toast.success("Logged in successfully");
+        navigate("/dashboard");
+        setEmail("");
+        setPassword("");
+      }
+    } catch (error) {
+      toast.error(error);
+    }
   }
 
   return (

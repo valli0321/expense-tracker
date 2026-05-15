@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-hot-toast";
 
 import Input from '../../components/Inputs/Input';
 import AuthLayout from '../../components/layouts/AuthLayout';
 import { validateEmail } from '../../utils/helper';
 import ProfilePhotoSelector from '../../components/Inputs/ProfilePhotoSelector';
+import { apiPost } from '../../utils/apiUtils';
+import { API_PATHS } from '../../utils/apiPath';
 
 const SignUp = () => {
   const [profilePic, setProfilePic] = useState(null);
@@ -18,8 +21,6 @@ const SignUp = () => {
 
   const handleSignUp = async (e) => {
     e.preventDefault();
-
-    let profileImageUrl = "";
 
     if(!fullName){
       setError("Please enter your name");
@@ -37,6 +38,22 @@ const SignUp = () => {
     }
 
     setError("");
+
+    const formData = new FormData();
+
+    formData.append("fullName", fullName);
+    formData.append("email", email);
+    formData.append("password", password);
+    
+    profilePic && formData.append("profileImage", profilePic);
+
+    try {
+      const response = await apiPost(API_PATHS.AUTH.REGISTER, formData);
+      toast.success("Regstered Successfully");
+      navigate("/login");
+    } catch (error) {
+      toast.error(error);
+    }
   }
 
   return (
