@@ -31,7 +31,9 @@ export const apiPost = async(url, data = {}, config = {}) => {
                 ...config,
                 headers: {
                     ...(isFormData
-                        ? {}
+                        ? {
+                            "Content-Type": "multipart/form-data",
+                        }
                         : {
                             "Content-Type": "application/json",
                         }

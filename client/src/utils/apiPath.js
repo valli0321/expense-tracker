@@ -6,7 +6,7 @@ export const API_PATHS = {
         LOGOUT: "/v1/auth/logout",
     },
     DASHBOARD: {
-        GET_DATA: "api/v1/dashboard",
+        GET_DATA: "/v1/dashboard",
     },
     CATEGORY: {
         ADD: "/v1/category/add-category",
