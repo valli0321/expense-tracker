@@ -4,6 +4,9 @@ import ApiResponse from "../utils/ApiResponse.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
 import { uploadOnCloudinary } from "../utils/cloudinary.js";
 
+import User from "../models/User.js";
+import Category from "../models/Category.js"
+
 const generateAccessandRefreshTokens = async (user) => {
   try {
     const accessToken = user.generateAccessToken();
@@ -60,11 +63,11 @@ export const registerUser = asyncHandler(async(req, res) => {
 
     // After user is created
     await Category.insertMany([
-        { userId: createdUser._id, name: "Salary", type: "income" },
-        { userId: createdUser._id, name: "Freelance", type: "income" },
-        { userId: createdUser._id, name: "Business", type: "income" },
-        { userId: createdUser._id, name: "Transport", type: "expense" },
-        { userId: createdUser._id, name: "Shopping", type: "expense" },
+        { userId: createdUser._id, name: "Salary" },
+        { userId: createdUser._id, name: "Freelance"},
+        { userId: createdUser._id, name: "Business" },
+        { userId: createdUser._id, name: "Transport" },
+        { userId: createdUser._id, name: "Shopping" },
     ]);
 
     res.status(201).json(new ApiResponse(201, createdUser, "User registered Successfully"));
