@@ -4,7 +4,8 @@ import { FaRegEye, FaRegEyeSlash } from 'react-icons/fa6'
 const Input = ({ value, onChange, placeholder, label, type }) => {
     const [showPassword, setShowPassoword] = useState(false);
 
-    const toggleShowPassword = () => {
+    const toggleShowPassword = (e) => {
+        e.preventDefault();
         setShowPassoword(!showPassword);
     };
 
@@ -22,21 +23,19 @@ const Input = ({ value, onChange, placeholder, label, type }) => {
                 />
 
                 {type === "password" && (
-                    <>
+                    <button type='button' onClick={(e) => toggleShowPassword(e)}>
                         {showPassword ? (
                             <FaRegEye
                                 size={22}
                                 className='text-primary cursor-pointer'
-                                onClick={() => toggleShowPassword()}
                             />
                         ) : (
                             <FaRegEyeSlash
                                 size={22}
                                 className='text-slate-400 cursor-pointer'
-                                onClick={() => toggleShowPassword()}
                             />    
                         )}
-                    </>
+                    </button>
                 )}
             </div>
         </div>
