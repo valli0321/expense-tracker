@@ -13,6 +13,7 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const  { updateUser } = useContext(UserContext);
 
@@ -32,6 +33,7 @@ const Login = () => {
     }
 
     setError("");
+    setIsSubmitting(true);
 
     try {
       const body = {
@@ -50,6 +52,8 @@ const Login = () => {
       }
     } catch (error) {
       toast.error(error);
+    } finally {
+      setIsSubmitting(false);
     }
   }
 
@@ -81,7 +85,7 @@ const Login = () => {
           {error && <p className='text-red-500 text-xs pb-2.5'>{error}</p>}
 
           <button type='submit' className='btn-primary'>
-            LOGIN
+            {isSubmitting ? "Signing in..." : "LOGIN"}
           </button>
 
           <p className='text-[13px] text-slate-800 mt-3'>

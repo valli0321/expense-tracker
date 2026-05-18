@@ -15,17 +15,16 @@ export const getInitials = (name) => {
     ).toUpperCase();
 }
 
-export const addThousandsSeparator = (num) => {
-    console.log(isNaN(num))
-    if(num === null|| isNaN(num)) return "NA";
-
-    const [integerPart, fractionalPart] = num.toString().split(".");
-    const formattedInteger = integerPart.replace(/\B(?=(\d{3})+(?!\d))/g,",");
-    return fractionalPart ? 
-        `${formattedInteger}.${fractionalPart}` : formattedInteger;
-}
-
 export const formatter = new Intl.NumberFormat("en-IN", {
-  style: "currency",
-  currency: "INR"
+    style: "currency",
+    currency: "INR"
 });
+
+export const formatDate = (
+    date,
+    options = {
+        day: "numeric",
+        month: "short",
+        year: "numeric",
+    }
+) => new Date(date).toLocaleDateString("en-IN", options);

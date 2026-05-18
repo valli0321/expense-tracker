@@ -17,8 +17,8 @@ const Currency= ({
     }
 
     return (
-        <div className='font-semibold'>
-            {isNaN(value) ? "NA" : `${formatter.format(Number(value))}`}
+        <div className='font-semibold text-2xl'>
+            {formatter.format(value)}
         </div>
   )
 }

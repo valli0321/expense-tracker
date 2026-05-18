@@ -14,6 +14,7 @@ const SignUp = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [fullName, setFullName] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const [error, setError] = useState(null);
 
@@ -38,6 +39,7 @@ const SignUp = () => {
     }
 
     setError("");
+    setIsSubmitting(true);
 
     const formData = new FormData();
 
@@ -53,6 +55,8 @@ const SignUp = () => {
       navigate("/login");
     } catch (error) {
       toast.error(error);
+    } finally {
+      setIsSubmitting(false);
     }
   }
 
@@ -96,7 +100,7 @@ const SignUp = () => {
           {error && <p className='text-red-500 text-xs pb-2.5'>{error}</p>}
           
           <button type='submit' className='btn-primary'>
-            SIGN UP
+            {isSubmitting ? "Creating account...": "Create Account"}
           </button>
 
           <p className='text-[13px] text-slate-800 mt-3'>
